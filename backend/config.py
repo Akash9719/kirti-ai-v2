@@ -17,17 +17,5 @@ class Settings:
         "llama-3.3-70b-versatile"
     )
 
-    GOOGLE_SHEET_NAME = os.getenv("GOOGLE_SHEET_NAME")
-
-    GOOGLE_CREDENTIALS_FILE = os.getenv(
-        "GOOGLE_CREDENTIALS_FILE",
-        "service_account.json"
-    )
-
-    ALLOWED_ORIGINS = os.getenv(
-        "ALLOWED_ORIGINS",
-        "*"
-    ).split(",")
-
 
 settings = Settings()
