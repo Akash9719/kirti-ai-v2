@@ -75,3 +75,17 @@ from chatbot import generate_response
     response_model=ChatResponse
 )
 
+def chat(request: ChatRequest):
+
+    reply = generate_response(
+
+        request.session_id,
+
+        request.message
+
+    )
+
+    return {
+
+        "reply": reply
+    }
