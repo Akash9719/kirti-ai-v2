@@ -75,9 +75,3 @@ from chatbot import generate_response
     response_model=ChatResponse
 )
 
-def chat(request: ChatRequest):
-
-    return {
-
-        "reply": f"You said: {request.message}"
-    }
