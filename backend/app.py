@@ -69,7 +69,7 @@ def health():
 # Chat
 # -----------------------
 
-@app.post(
+from chatbot import generate_response
     "/chat",
     response_model=ChatResponse
 )
