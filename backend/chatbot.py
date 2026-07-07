@@ -10,18 +10,13 @@ client = Groq(api_key=settings.GROQ_API_KEY)
 
 
 def generate_response(session_id: str, user_message: str):
-
     knowledge = load_knowledge()
     history = get_history(session_id)
 
     messages = [
         {
             "role": "system",
-            "content": (
-                SYSTEM_PROMPT
-                + "\n\nKnowledge Base:\n"
-                + knowledge
-            ),
+            "content": SYSTEM_PROMPT + "\n\nKnowledge Base:\n" + knowledge,
         }
     ]
 
