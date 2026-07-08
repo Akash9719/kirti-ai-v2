@@ -21,11 +21,3 @@ def get_google_credentials():
         raise RuntimeError(
             "GOOGLE_CREDENTIALS environment variable is not configured."
         )
-
-    # Supports credentials stored either as normal JSON
-    # or as a JSON-encoded string
-    try:
-        credentials_data = json.loads(secret_value)
-
-        if isinstance(credentials_data, str):
-            credentials_data = json.loads(credentials_data)
