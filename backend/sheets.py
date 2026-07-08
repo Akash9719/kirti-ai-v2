@@ -37,16 +37,4 @@ def get_google_credentials():
 
     return Credentials.from_service_account_info(
         credentials_data,
-        scopes=SCOPES,
-    )
-
-
-def get_worksheet():
-    credentials = get_google_credentials()
-
-    client = gspread.authorize(credentials)
-
-    spreadsheet = client.open(SPREADSHEET_NAME)
-
-    return spreadsheet.sheet1
-
+        scopes=SCOPES
