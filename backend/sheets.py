@@ -14,29 +14,6 @@ SCOPES = [
 ]
 
 
-def get_google_credentials():
-    secret_value = os.getenv("GOOGLE_CREDENTIALS")
-
-    if not secret_value:
-        raise RuntimeError(
-            "GOOGLE_CREDENTIALS environment variable is not configured."
-        )
-
-    try:
-        credentials_data = json.loads(secret_value)
-
-        if isinstance(credentials_data, str):
-            credentials_data = json.loads(credentials_data)
-
-    except json.JSONDecodeError as error:
-        raise RuntimeError(
-            "GOOGLE_CREDENTIALS contains invalid JSON."
-        ) from error
-
-    return Credentials.from_service_account_info(
-        credentials_data,
-        scopes=SCOPES,
-    )
 
 
 def get_worksheet():
