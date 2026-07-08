@@ -13,7 +13,31 @@ SCOPES = [
     "https://www.googleapis.com/auth/drive",
 ]
 
+def get_google_credentials():
+    secret_value = os.getenv("GOOGLE_CREDENTIALS")
 
+    if not secret_value:
+        raise RuntimeError(
+            "GOOGLE_CREDENTIALS environment variable is not configured."
+        )
+
+    try:
+        # First decode: removes the outer quotation marks
+        if secret_value.strip().startswith('"'):
+            secret_value = json.loads(secret_value)
+
+        # Second decode: converts JSON text into a Python dictionary
+        credentials_data = json.loads(secret_value)
+
+    except (json.JSONDecodeError, TypeError) as error:
+        raise RuntimeError(
+            "GOOGLE_CREDENTIALS contains invalid JSON."
+        ) from error
+
+    return Credentials.from_service_account_info(
+        credentials_data,
+        scopes=SCOPES,
+    )
 
 
 def get_worksheet():
