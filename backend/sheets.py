@@ -29,12 +29,3 @@ def get_google_credentials():
 
         if isinstance(credentials_data, str):
             credentials_data = json.loads(credentials_data)
-
-    except json.JSONDecodeError as error:
-        raise RuntimeError(
-            "GOOGLE_CREDENTIALS contains invalid JSON."
-        ) from error
-
-    return Credentials.from_service_account_info(
-        credentials_data,
-        scopes=SCOPES
