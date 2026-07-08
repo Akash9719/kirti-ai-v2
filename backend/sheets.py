@@ -50,21 +50,3 @@ def get_worksheet():
 
     return spreadsheet.sheet1
 
-
-def save_to_google_sheets(
-    name: str,
-    email: str,
-    requirement: str,
-):
-    worksheet = get_worksheet()
-
-    worksheet.append_row(
-        [
-            name.strip(),
-            email.strip(),
-            requirement.strip(),
-            datetime.now().strftime("%Y-%m-%d %H:%M:%S"),
-        ]
-    )
-
-    return True
