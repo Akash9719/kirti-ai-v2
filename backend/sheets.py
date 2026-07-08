@@ -1,4 +1,3 @@
-def save_lead(data):
 
     print("Lead Saved")
 
