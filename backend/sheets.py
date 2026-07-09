@@ -65,7 +65,9 @@ def save_to_google_sheets(
             email.strip(),
             phone.strip(),
             requirement.strip(),
-            datetime.now().strftime("%Y-%m-%d %H:%M:%S"),
+            datetime.now(
+                ZoneInfo("Asia/Kolkata")
+            ).strftime("%Y-%m-%d %H:%M:%S"),
         ]
     )
 
