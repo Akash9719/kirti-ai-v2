@@ -18,4 +18,5 @@ class LeadRequest(BaseModel):
 
 
 class HealthResponse(BaseModel):
-    status: str
+    status: bool
+    message: str
