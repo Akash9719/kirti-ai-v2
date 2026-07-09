@@ -1,5 +1,7 @@
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
+from models import LeadRequest, LeadResponse
+from sheets import save_to_google_sheets
 
 from config import settings
 from models import (
