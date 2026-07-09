@@ -96,3 +96,13 @@ def chat(request: ChatRequest):
 
 @app.post("/lead", response_model=LeadResponse)
 def create_lead(lead: LeadRequest):
+    save_to_google_sheets(
+        name=lead.name,
+        email=lead.email,
+        phone=lead.phone,
+        requirement=lead.requirement,
+    )
+    return {
+        "success": True,
+        "message": "Thank you! Our team will contact you soon.",
+    }
