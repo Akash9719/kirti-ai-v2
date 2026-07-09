@@ -7,7 +7,9 @@ from config import settings
 from models import (
     ChatRequest,
     ChatResponse,
-    HealthResponse
+    HealthResponse,
+    LeadRequest,
+    LeadResponse,
 )
 
 app = FastAPI(
