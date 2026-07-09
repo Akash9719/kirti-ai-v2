@@ -14,7 +14,6 @@ class LeadRequest(BaseModel):
     name: str
     email: str
     phone: str
-    company: str = ""
     requirement: str = ""
 
 
