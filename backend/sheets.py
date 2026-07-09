@@ -70,3 +70,9 @@ def save_to_google_sheets(
 
     return True
 class LeadRequest(BaseModel):
+    name: str
+    email: str
+    phone: str
+    requirement: str
+
+
