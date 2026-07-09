@@ -14,7 +14,7 @@ class LeadRequest(BaseModel):
     name: str
     email: str
     phone: str
-    requirement: str = ""
+    requirement: str
 
 
 class HealthResponse(BaseModel):
