@@ -76,3 +76,6 @@ class LeadRequest(BaseModel):
     requirement: str
 
 
+class LeadResponse(BaseModel):
+    success: bool
+    message: str
