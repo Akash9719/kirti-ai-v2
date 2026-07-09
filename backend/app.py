@@ -93,3 +93,6 @@ def chat(request: ChatRequest):
 
         "reply": reply
     }
+
+@app.post("/lead", response_model=LeadResponse)
+def create_lead(lead: LeadRequest):
