@@ -1,1 +1,153 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
 
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <title>Kirti AI Assistant</title>
+
+    <link
+        rel="stylesheet"
+        href="style.css"
+    >
+</head>
+
+<body>
+
+    <main class="chat-app">
+
+        <section class="chat-container">
+
+            <header class="chat-header">
+
+                <div class="assistant-profile">
+
+                    <div class="assistant-avatar">
+                        <img
+                            src="logo.png"
+                            alt="Kirti AI"
+                        >
+                    </div>
+
+                    <div class="assistant-info">
+                        <h1>Kirti AI</h1>
+
+                        <div class="assistant-status">
+                            <span class="status-dot"></span>
+                            <span>Online</span>
+                        </div>
+                    </div>
+
+                </div>
+
+                <button
+                    id="clearChatButton"
+                    class="header-button"
+                    type="button"
+                    aria-label="Clear conversation"
+                    title="Clear conversation"
+                >
+                    ↻
+                </button>
+
+            </header>
+
+
+            <div
+                id="chatMessages"
+                class="chat-messages"
+                aria-live="polite"
+            >
+
+                <div class="message-row bot-row">
+
+                    <div class="message-avatar">
+                        <img
+                            src="logo.png"
+                            alt=""
+                        >
+                    </div>
+
+                    <div class="message-content">
+
+                        <div class="message-bubble bot-message">
+                            Hi! I’m Kirti, the AI assistant for
+                            Rishikirti Technologies. How can I help you today?
+                        </div>
+
+                        <span class="message-time">
+                            Just now
+                        </span>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+
+            <div
+                id="typingIndicator"
+                class="typing-indicator hidden"
+            >
+
+                <div class="typing-avatar">
+                    <img
+                        src="logo.png"
+                        alt=""
+                    >
+                </div>
+
+                <div class="typing-bubble">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </div>
+
+            </div>
+
+
+            <form
+                id="chatForm"
+                class="chat-input-area"
+            >
+
+                <textarea
+                    id="messageInput"
+                    class="message-input"
+                    placeholder="Type your message..."
+                    rows="1"
+                    maxlength="2000"
+                    aria-label="Message"
+                    required
+                ></textarea>
+
+                <button
+                    id="sendButton"
+                    class="send-button"
+                    type="submit"
+                    aria-label="Send message"
+                >
+                    <span>➤</span>
+                </button>
+
+            </form>
+
+
+            <footer class="chat-footer">
+                Powered by Rishikirti Technologies
+            </footer>
+
+        </section>
+
+    </main>
+
+
+    <script src="script.js"></script>
+
+</body>
+</html>
