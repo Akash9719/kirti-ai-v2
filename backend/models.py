@@ -17,6 +17,10 @@ class LeadRequest(BaseModel):
     requirement: str
 
 
-class HealthResponse(BaseModel):
-    status: bool
+class LeadResponse(BaseModel):
+    success: bool
     message: str
+
+
+class HealthResponse(BaseModel):
+    status: str
