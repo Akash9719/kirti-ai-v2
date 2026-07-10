@@ -1,1 +1,452 @@
+/* =========================
+   Kirti AI v2 — Base
+========================= */
 
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+:root {
+    --primary: #1f5eff;
+    --primary-dark: #1748c7;
+    --background: #eef3f8;
+    --surface: #ffffff;
+    --header: #0f172a;
+    --text: #172033;
+    --muted: #7b8497;
+    --border: #e5eaf1;
+    --bot-bubble: #f1f4f8;
+    --user-bubble: #1f5eff;
+    --success: #22c55e;
+    --shadow: 0 18px 50px rgba(15, 23, 42, 0.14);
+}
+
+html,
+body {
+    width: 100%;
+    min-height: 100%;
+}
+
+body {
+    min-height: 100vh;
+    font-family:
+        Inter,
+        -apple-system,
+        BlinkMacSystemFont,
+        "Segoe UI",
+        Roboto,
+        Arial,
+        sans-serif;
+    background:
+        radial-gradient(
+            circle at top left,
+            rgba(31, 94, 255, 0.12),
+            transparent 34%
+        ),
+        var(--background);
+    color: var(--text);
+}
+
+
+/* =========================
+   App Layout
+========================= */
+
+.chat-app {
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 24px;
+}
+
+.chat-container {
+    width: min(100%, 430px);
+    height: min(760px, calc(100vh - 48px));
+    min-height: 560px;
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+    background: var(--surface);
+    border: 1px solid rgba(15, 23, 42, 0.08);
+    border-radius: 24px;
+    box-shadow: var(--shadow);
+}
+
+
+/* =========================
+   Header
+========================= */
+
+.chat-header {
+    min-height: 82px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 16px 18px;
+    background: var(--header);
+    color: #ffffff;
+}
+
+.assistant-profile {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+.assistant-avatar,
+.message-avatar,
+.typing-avatar {
+    flex-shrink: 0;
+    overflow: hidden;
+    border-radius: 50%;
+    background: #ffffff;
+}
+
+.assistant-avatar {
+    width: 48px;
+    height: 48px;
+    padding: 3px;
+}
+
+.assistant-avatar img,
+.message-avatar img,
+.typing-avatar img {
+    width: 100%;
+    height: 100%;
+    display: block;
+    object-fit: cover;
+    border-radius: inherit;
+}
+
+.assistant-info h1 {
+    font-size: 17px;
+    line-height: 1.2;
+    font-weight: 700;
+}
+
+.assistant-status {
+    margin-top: 5px;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    font-size: 12px;
+    color: rgba(255, 255, 255, 0.75);
+}
+
+.status-dot {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background: var(--success);
+    box-shadow: 0 0 0 3px rgba(34, 197, 94, 0.14);
+}
+
+.header-button {
+    width: 38px;
+    height: 38px;
+    border: 0;
+    border-radius: 12px;
+    background: rgba(255, 255, 255, 0.08);
+    color: #ffffff;
+    font-size: 22px;
+    cursor: pointer;
+    transition:
+        background 0.2s ease,
+        transform 0.2s ease;
+}
+
+.header-button:hover {
+    background: rgba(255, 255, 255, 0.16);
+}
+
+.header-button:active {
+    transform: scale(0.95);
+}
+
+
+/* =========================
+   Messages Area
+========================= */
+
+.chat-messages {
+    flex: 1;
+    overflow-y: auto;
+    padding: 22px 16px 14px;
+    background: #ffffff;
+    scroll-behavior: smooth;
+}
+
+.chat-messages::-webkit-scrollbar {
+    width: 5px;
+}
+
+.chat-messages::-webkit-scrollbar-thumb {
+    background: #d6dce6;
+    border-radius: 999px;
+}
+
+.message-row {
+    width: 100%;
+    display: flex;
+    align-items: flex-end;
+    gap: 8px;
+    margin-bottom: 18px;
+}
+
+.bot-row {
+    justify-content: flex-start;
+}
+
+.user-row {
+    justify-content: flex-end;
+}
+
+.message-avatar,
+.typing-avatar {
+    width: 30px;
+    height: 30px;
+    padding: 2px;
+    border: 1px solid var(--border);
+}
+
+.message-content {
+    max-width: 78%;
+    display: flex;
+    flex-direction: column;
+}
+
+.user-row .message-content {
+    align-items: flex-end;
+}
+
+.message-bubble {
+    padding: 11px 14px;
+    border-radius: 18px;
+    font-size: 14px;
+    line-height: 1.55;
+    overflow-wrap: anywhere;
+    white-space: pre-wrap;
+}
+
+.bot-message {
+    background: var(--bot-bubble);
+    color: var(--text);
+    border-bottom-left-radius: 6px;
+}
+
+.user-message {
+    background: var(--user-bubble);
+    color: #ffffff;
+    border-bottom-right-radius: 6px;
+}
+
+.message-time {
+    margin-top: 5px;
+    padding: 0 4px;
+    font-size: 10px;
+    color: var(--muted);
+}
+
+
+/* =========================
+   Typing Indicator
+========================= */
+
+.typing-indicator {
+    display: flex;
+    align-items: flex-end;
+    gap: 8px;
+    padding: 0 16px 12px;
+    background: #ffffff;
+}
+
+.typing-bubble {
+    min-width: 58px;
+    height: 38px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 4px;
+    border-radius: 18px 18px 18px 6px;
+    background: var(--bot-bubble);
+}
+
+.typing-bubble span {
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    background: #8993a5;
+    animation: typing 1.2s infinite ease-in-out;
+}
+
+.typing-bubble span:nth-child(2) {
+    animation-delay: 0.15s;
+}
+
+.typing-bubble span:nth-child(3) {
+    animation-delay: 0.3s;
+}
+
+@keyframes typing {
+    0%,
+    60%,
+    100% {
+        transform: translateY(0);
+        opacity: 0.45;
+    }
+
+    30% {
+        transform: translateY(-4px);
+        opacity: 1;
+    }
+}
+
+.hidden {
+    display: none !important;
+}
+
+
+/* =========================
+   Input Area
+========================= */
+
+.chat-input-area {
+    display: flex;
+    align-items: flex-end;
+    gap: 10px;
+    padding: 12px 14px;
+    background: #ffffff;
+    border-top: 1px solid var(--border);
+}
+
+.message-input {
+    flex: 1;
+    min-height: 44px;
+    max-height: 120px;
+    resize: none;
+    overflow-y: auto;
+    padding: 11px 14px;
+    border: 1px solid var(--border);
+    border-radius: 16px;
+    outline: none;
+    background: #f8fafc;
+    color: var(--text);
+    font: inherit;
+    font-size: 14px;
+    line-height: 1.5;
+    transition:
+        border-color 0.2s ease,
+        box-shadow 0.2s ease,
+        background 0.2s ease;
+}
+
+.message-input::placeholder {
+    color: #9aa3b2;
+}
+
+.message-input:focus {
+    background: #ffffff;
+    border-color: rgba(31, 94, 255, 0.55);
+    box-shadow: 0 0 0 3px rgba(31, 94, 255, 0.1);
+}
+
+.send-button {
+    width: 44px;
+    height: 44px;
+    flex-shrink: 0;
+    display: grid;
+    place-items: center;
+    border: 0;
+    border-radius: 14px;
+    background: var(--primary);
+    color: #ffffff;
+    cursor: pointer;
+    transition:
+        background 0.2s ease,
+        transform 0.2s ease,
+        opacity 0.2s ease;
+}
+
+.send-button span {
+    display: block;
+    font-size: 17px;
+    transform: translateX(1px);
+}
+
+.send-button:hover {
+    background: var(--primary-dark);
+}
+
+.send-button:active {
+    transform: scale(0.95);
+}
+
+.send-button:disabled {
+    cursor: not-allowed;
+    opacity: 0.55;
+}
+
+
+/* =========================
+   Footer
+========================= */
+
+.chat-footer {
+    padding: 8px 12px 10px;
+    background: #ffffff;
+    color: var(--muted);
+    text-align: center;
+    font-size: 10px;
+}
+
+
+/* =========================
+   Responsive
+========================= */
+
+@media (max-width: 520px) {
+    body {
+        background: #ffffff;
+    }
+
+    .chat-app {
+        padding: 0;
+    }
+
+    .chat-container {
+        width: 100%;
+        height: 100dvh;
+        min-height: 100dvh;
+        border: 0;
+        border-radius: 0;
+        box-shadow: none;
+    }
+
+    .chat-header {
+        min-height: 76px;
+        padding:
+            max(14px, env(safe-area-inset-top))
+            16px
+            14px;
+    }
+
+    .chat-messages {
+        padding: 18px 12px 12px;
+    }
+
+    .message-content {
+        max-width: 82%;
+    }
+
+    .chat-input-area {
+        padding: 10px 12px;
+    }
+
+    .chat-footer {
+        padding-bottom:
+            max(8px, env(safe-area-inset-bottom));
+    }
+}
