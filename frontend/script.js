@@ -4,7 +4,7 @@
 
 // IMPORTANT:
 // Replace this URL with your own Codespaces backend URL.
-const API_URL = "https://redesigned-goggles-9xjpr54w7xr379r4.github.dev/";
+const API_URL = "https://redesigned-goggles-9xjpr54w7xr379r4.github.dev/chat";
 
 // Generate one session ID per browser session
 const SESSION_ID =
