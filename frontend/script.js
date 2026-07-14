@@ -193,3 +193,167 @@ function renderMessage(
     scrollToBottom();
 
 }
+
+// ======================================
+// Part 2
+// ======================================
+
+// ---------- Send Message ----------
+
+async function handleSubmit(event) {
+
+    event.preventDefault();
+
+    if (isSending) return;
+
+    const message = messageInput.value.trim();
+
+    if (!message) return;
+
+    await sendMessage(message);
+
+}
+
+async function sendMessage(message) {
+
+    disableInput();
+
+    renderMessage(message, "user");
+
+    messageInput.value = "";
+
+    messageInput.style.height = "auto";
+
+    showTyping();
+
+    try {
+
+        await chatbot.typingDelay();
+
+        const response =
+            await chatbot.send(message);
+
+        hideTyping();
+
+        renderMessage(
+            response.reply,
+            "bot"
+        );
+
+    }
+
+    catch (error) {
+
+        hideTyping();
+
+        renderMessage(
+
+            "⚠️ Something went wrong while contacting Kirti AI. Please try again.",
+
+            "bot"
+
+        );
+
+        console.error(error);
+
+    }
+
+    enableInput();
+
+}
+
+
+// ---------- Keyboard ----------
+
+function handleKeyDown(event) {
+
+    if (
+
+        event.key === "Enter"
+
+        &&
+
+        !event.shiftKey
+
+    ) {
+
+        event.preventDefault();
+
+        chatForm.requestSubmit();
+
+    }
+
+}
+
+
+// ---------- Clear Conversation ----------
+
+function clearConversation() {
+
+    chatbot.newSession();
+
+    chatMessages.innerHTML = `
+
+<div class="message-row bot-row">
+
+<div class="message-avatar">
+
+<img src="${CONFIG.BOT_AVATAR}" alt="">
+
+</div>
+
+<div class="message-content">
+
+<div class="message-bubble bot-message">
+
+${chatbot.format(CONFIG.GREETING)}
+
+</div>
+
+<span class="message-time">
+
+${getCurrentTime()}
+
+</span>
+
+</div>
+
+</div>
+
+`;
+
+    hideTyping();
+
+    messageInput.value = "";
+
+    messageInput.style.height = "auto";
+
+    enableInput();
+
+    scrollToBottom();
+
+}
+
+
+// ---------- Initial Resize ----------
+
+autoResize();
+
+
+// ---------- Export ----------
+
+window.KirtiUI = {
+
+    renderMessage,
+
+    clearConversation,
+
+    showTyping,
+
+    hideTyping,
+
+    enableInput,
+
+    disableInput
+
+};
