@@ -108,9 +108,8 @@ class KirtiAI {
 
                 success: true,
 
-                reply:
-                    data.reply
-
+                reply: data.reply || "I couldn't generate a response.",
+                raw: data
             };
 
         }
