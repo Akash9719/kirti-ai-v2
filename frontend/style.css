@@ -450,3 +450,72 @@ body {
             max(8px, env(safe-area-inset-bottom));
     }
 }
+/* =========================
+   Send Button Loading
+========================= */
+
+.send-button.loading {
+    pointer-events: none;
+    opacity: .8;
+}
+
+.send-button.loading span {
+    display: none;
+}
+
+.send-button.loading::after {
+
+    content: "";
+
+    width: 18px;
+    height: 18px;
+
+    border-radius: 50%;
+
+    border: 2px solid rgba(255,255,255,.4);
+    border-top-color:#fff;
+
+    animation: spin .8s linear infinite;
+
+}
+
+@keyframes spin{
+
+    to{
+
+        transform:rotate(360deg);
+
+    }
+
+}
+
+
+/* =========================
+   Smooth Fade
+========================= */
+
+.message-row{
+
+    animation:fadeMessage .25s ease;
+
+}
+
+@keyframes fadeMessage{
+
+    from{
+
+        opacity:0;
+
+        transform:translateY(10px);
+
+    }
+
+    to{
+
+        opacity:1;
+
+        transform:translateY(0);
+
+    }
+
+}
