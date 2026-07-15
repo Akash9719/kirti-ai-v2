@@ -218,6 +218,8 @@ async function sendMessage(message) {
 
     disableInput();
 
+    sendButton.classList.add("loading");
+
     renderMessage(message, "user");
 
     messageInput.value = "";
