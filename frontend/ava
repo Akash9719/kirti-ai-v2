@@ -1,0 +1,347 @@
+// ======================================
+// Kirti AI UI Controller
+// Part 1
+// ======================================
+
+// ---------- DOM ----------
+const chatForm = document.getElementById("chatForm");
+const messageInput = document.getElementById("messageInput");
+const chatMessages = document.getElementById("chatMessages");
+const sendButton = document.getElementById("sendButton");
+const typingIndicator = document.getElementById("typingIndicator");
+const clearChatButton = document.getElementById("clearChatButton");
+
+// ---------- State ----------
+let isSending = false;
+
+// ---------- Initialize ----------
+initializeChat();
+
+function initializeChat() {
+    bindEvents();
+    renderSuggestions();
+    messageInput.focus();
+    scrollToBottom();
+}
+
+// ---------- Event Binding ----------
+function bindEvents() {
+
+    chatForm.addEventListener("submit", handleSubmit);
+
+    messageInput.addEventListener("keydown", handleKeyDown);
+
+    messageInput.addEventListener("input", autoResize);
+
+    clearChatButton.addEventListener(
+        "click",
+        clearConversation
+    );
+
+}
+
+// ---------- Utilities ----------
+
+function scrollToBottom() {
+
+    if (!CONFIG.ENABLE_AUTO_SCROLL) return;
+
+    requestAnimationFrame(() => {
+
+        chatMessages.scrollTop =
+            chatMessages.scrollHeight;
+
+    });
+
+}
+
+function getCurrentTime() {
+
+    return new Date().toLocaleTimeString([], {
+
+        hour: "2-digit",
+
+        minute: "2-digit"
+
+    });
+
+}
+
+function autoResize() {
+
+    messageInput.style.height = "auto";
+
+    messageInput.style.height =
+        Math.min(
+            messageInput.scrollHeight,
+            120
+        ) + "px";
+
+}
+
+function disableInput() {
+
+    isSending = true;
+
+    messageInput.disabled = true;
+
+    sendButton.disabled = true;
+
+}
+
+function enableInput() {
+
+    isSending = false;
+
+    messageInput.disabled = false;
+
+    sendButton.disabled = false;
+
+    messageInput.focus();
+
+}
+
+function escapeHtml(text) {
+
+    const div =
+        document.createElement("div");
+
+    div.textContent = text;
+
+    return div.innerHTML;
+
+}
+
+// ---------- Typing Indicator ----------
+
+function showTyping() {
+
+    typingIndicator.classList.remove("hidden");
+
+    scrollToBottom();
+
+}
+
+function hideTyping() {
+
+    typingIndicator.classList.add("hidden");
+
+}
+
+// ---------- Message Rendering ----------
+// ======================================
+// Suggested Questions
+// ======================================
+
+function renderSuggestions() {
+
+    if (!CONFIG.SUGGESTIONS?.length) return;
+
+    const container =
+        document.createElement("div");
+
+    container.id = "suggestedQuestions";
+
+    container.className = "suggestions";
+
+    CONFIG.SUGGESTIONS.forEach(question => {
+
+        const button =
+            document.createElement("button");
+
+        button.type = "button";
+
+        button.className =
+            "suggestion-chip";
+
+        button.textContent = question;
+
+        button.addEventListener(
+
+            "click",
+
+            async () => {
+
+                if (isSending) return;
+
+                removeSuggestions();
+
+                await sendMessage(question);
+
+            }
+
+        );
+
+        container.appendChild(button);
+
+    });
+
+    chatMessages.appendChild(container);
+
+}
+
+function removeSuggestions() {
+
+    const suggestions =
+        document.getElementById(
+            "suggestedQuestions"
+        );
+
+    if (suggestions) {
+
+        suggestions.remove();
+
+    }
+
+}
+
+// ======================================
+// Part 2
+// ======================================
+
+// ---------- Send Message ----------
+async function sendMessage(message) {
+
+    disableInput();
+
+    sendButton.classList.add("loading");
+
+    renderMessage(message, "user");
+
+    removeSuggestions();
+
+    messageInput.value = "";
+
+    messageInput.style.height = "auto";
+
+    showTyping();
+
+    try {
+
+        await chatbot.typingDelay();
+
+        const response = await chatbot.send(message);
+
+        renderMessage(
+            response.reply,
+            "bot"
+        );
+
+    }
+    catch (error) {
+
+        renderMessage(
+            "⚠️ Something went wrong while contacting Kirti AI. Please try again.",
+            "bot"
+        );
+
+        console.error(error);
+
+    }
+    finally {
+
+        hideTyping();
+
+        sendButton.classList.remove("loading");
+
+        enableInput();
+
+    }
+
+}
+
+// ---------- Keyboard ----------
+
+function handleKeyDown(event) {
+
+    if (
+
+        event.key === "Enter"
+
+        &&
+
+        !event.shiftKey
+
+    ) {
+
+        event.preventDefault();
+
+        chatForm.requestSubmit();
+
+    }
+
+}
+
+
+// ---------- Clear Conversation ----------
+
+function clearConversation() {
+
+    chatbot.newSession();
+
+    chatMessages.innerHTML = `
+
+<div class="message-row bot-row">
+
+<div class="message-avatar">
+
+<img src="${CONFIG.BOT_AVATAR}" alt="">
+
+</div>
+
+<div class="message-content">
+
+<div class="message-bubble bot-message">
+
+${chatbot.format(CONFIG.GREETING)}
+
+</div>
+
+<span class="message-time">
+
+${getCurrentTime()}
+
+</span>
+
+</div>
+
+</div>
+
+`;
+
+    hideTyping();
+
+    messageInput.value = "";
+
+    messageInput.style.height = "auto";
+
+    enableInput();
+
+    scrollToBottom();
+    renderSuggestions();
+
+}
+
+
+// ---------- Initial Resize ----------
+
+autoResize();
+
+
+// ---------- Export ----------
+
+window.KirtiUI = {
+
+    renderMessage,
+
+    clearConversation,
+
+    showTyping,
+
+    hideTyping,
+
+    enableInput,
+
+    disableInput
+
+};
