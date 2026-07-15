@@ -21,8 +21,19 @@ const CONFIG = {
 
     COMPANY_NAME: "Rishikirti Technologies",
 
-    GREETING:
-        "👋 Welcome to Rishikirti Technologies!\n\nI'm Kirti AI, your intelligent business assistant.\n\nI can help you with ERP, Data Analytics, AI Solutions, Automation, JD Edwards, Oracle ERP, Power BI and much more.",
+    GREETING:`👋 <strong>Welcome to Rishikirti Technologies!</strong>
+
+    I'm <strong>Kirti AI</strong>, your AI-powered business assistant.
+
+    I can help you with:
+
+    📊 Data Analytics & BI
+    🤖 AI Solutions & Automation
+    ⚙️ Oracle ERP & JD Edwards
+    📈 Microsoft Power BI
+    💼 Digital Transformation
+
+    How can I assist you today?`,
 
     SESSION_KEY: "kirti_session",
 
