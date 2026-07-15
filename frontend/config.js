@@ -33,8 +33,15 @@ const CONFIG = {
     📈 Microsoft Power BI
     💼 Digital Transformation
 
-    How can I assist you today?`,
+    How can I assist you today?`
 
+    SUGGESTIONS: [
+        "What services do you provide?",
+        "Tell me about Oracle ERP",
+        "Data Analytics Solutions",
+        "Book a Free Consultation"
+    ],
+    
     SESSION_KEY: "kirti_session",
 
     MAX_MESSAGE_LENGTH: 2000,
@@ -55,5 +62,6 @@ const CONFIG = {
 
     TYPING_DELAY: 800,
     MIN_LOADING_TIME: 500
+
 
 };
