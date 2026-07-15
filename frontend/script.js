@@ -200,20 +200,6 @@ function renderMessage(
 
 // ---------- Send Message ----------
 
-async function handleSubmit(event) {
-
-    event.preventDefault();
-
-    if (isSending) return;
-
-    const message = messageInput.value.trim();
-
-    if (!message) return;
-
-    await sendMessage(message);
-
-}
-
 async function sendMessage(message) {
 
     disableInput();
@@ -232,10 +218,7 @@ async function sendMessage(message) {
 
         await chatbot.typingDelay();
 
-        const response =
-            await chatbot.send(message);
-
-        hideTyping();
+        const response = await chatbot.send(message);
 
         renderMessage(
             response.reply,
@@ -243,27 +226,27 @@ async function sendMessage(message) {
         );
 
     }
-
     catch (error) {
 
-        hideTyping();
-
         renderMessage(
-
             "⚠️ Something went wrong while contacting Kirti AI. Please try again.",
-
             "bot"
-
         );
 
         console.error(error);
 
     }
+    finally {
 
-    enableInput();
+        hideTyping();
+
+        sendButton.classList.remove("loading");
+
+        enableInput();
+
+    }
 
 }
-
 
 // ---------- Keyboard ----------
 
