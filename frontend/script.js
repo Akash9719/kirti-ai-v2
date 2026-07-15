@@ -342,3 +342,28 @@ window.KirtiUI = {
     disableInput
 
 };
+
+function initializeSuggestions() {
+
+    document
+        .querySelectorAll(".suggestion-chip")
+        .forEach(chip => {
+
+            chip.addEventListener(
+                "click",
+                async () => {
+
+                    if (isSending) return;
+
+                    chip.blur();
+
+                    await sendMessage(
+                        chip.textContent.trim()
+                    );
+
+                }
+            );
+
+        });
+
+}
