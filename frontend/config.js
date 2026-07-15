@@ -42,6 +42,6 @@ const CONFIG = {
 
     BOT_AVATAR: "logo.png",
 
-    TYPING
+    TYPING_DELAY: 800
 
 };
