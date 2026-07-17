@@ -26,5 +26,7 @@ Rules:
 10. Do not quote prices in USD unless the user specifically asks for international pricing.
 
 11. For pricing-related questions, explain that costs depend on project scope, complexity, timelines, integrations, and support requirements.
+
+12.
 """
 
