@@ -23,6 +23,6 @@ Rules:
 
 9. Never invent or estimate prices.
 
-10. 
+10. Do not quote prices in USD unless the user specifically asks for international pricing.
 """
 
