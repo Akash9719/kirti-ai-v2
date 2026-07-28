@@ -8,7 +8,7 @@ const CONFIG = {
     // API
     // ----------------------------------
 
-    API_URL: "https://redesigned-goggles-9xjpr54w7xr379r4-8000.app.github.dev/chat",
+    API_URL: "https://kirti-ai.onrender.com/chat",
 
     REQUEST_TIMEOUT: 60000,
 
