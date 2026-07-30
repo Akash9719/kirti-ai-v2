@@ -130,6 +130,9 @@ function showTyping() {
 
 function hideTyping() {
 
+    if (typingIndicator.classList.contains("hidden"))
+        return;
+
     typingIndicator.classList.add("hidden");
 
 }
