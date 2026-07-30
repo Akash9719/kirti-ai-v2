@@ -96,6 +96,8 @@ function enableInput() {
 
     sendButton.disabled = false;
 
+    sendButton.style.cursor = "pointer";
+
     messageInput.focus();
 
 }
