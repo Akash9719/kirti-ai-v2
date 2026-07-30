@@ -52,78 +52,49 @@ class KirtiAI {
 
     async send(message) {
 
-        const controller =
-            new AbortController();
+        const controller = new AbortController();
 
-        const timeout =
-            setTimeout(() => {
-
-                controller.abort();
-
-            }, CONFIG.REQUEST_TIMEOUT);
+        const timeout = setTimeout(() => {
+            controller.abort();
+        }, CONFIG.REQUEST_TIMEOUT);
 
         try {
 
-            const response =
-                await fetch(
-                    this.apiUrl,
-                    {
-
-                        method: "POST",
-
-                        headers: {
-                            "Content-Type":
-                                "application/json"
-                        },
-
-                        body: JSON.stringify({
-
-                            session_id:
-                                this.sessionId,
-
-                            message
-
-                        }),
-
-                        signal:
-                            controller.signal
-
-                    }
-                );
-
-            clearTimeout(timeout);
+            const response = await fetch(this.apiUrl, {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json"
+                },
+                body: JSON.stringify({
+                    session_id: this.sessionId,
+                    message
+                }),
+                signal: controller.signal
+            });
 
             if (!response.ok) {
-
-                throw new Error(
-                    "API Error"
-                );
-
+                throw new Error(`HTTP ${response.status}`);
             }
 
-            const data =
-                await response.json();
+            const data = await response.json();
 
             return {
-
                 success: true,
-
-                reply: data.reply || "I couldn't generate a response.",
-                raw: data
+                reply: data.reply
             };
 
-        }
+        } catch (error) {
 
-        catch (error) {
+            console.error(error);
 
             return {
-
                 success: false,
-
-                reply:
-                    "⚠️ Unable to connect to Kirti AI. Please try again."
-
+                reply: "⚠️ Unable to connect to Kirti AI. Please try again."
             };
+
+        } finally {
+
+            clearTimeout(timeout);
 
         }
 
