@@ -86,6 +86,8 @@ function disableInput() {
 
     sendButton.disabled = true;
 
+    sendButton.style.cursor = "not-allowed";
+
 }
 
 function enableInput() {
