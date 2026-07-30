@@ -119,6 +119,9 @@ function escapeHtml(text) {
 
 function showTyping() {
 
+    if (!typingIndicator.classList.contains("hidden"))
+        return;
+
     typingIndicator.classList.remove("hidden");
 
     scrollToBottom();
