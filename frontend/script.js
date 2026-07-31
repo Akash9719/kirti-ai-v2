@@ -261,6 +261,23 @@ async function sendMessage(message) {
 // ---------- Form Submit ----------
 
 async function handleSubmit(event) {
+    
+    event.preventDefault();
+
+    if (isSending) return;
+
+    const message = messageInput.value.trim();
+
+    if (!message) return;
+
+    if (message.length > CONFIG.MAX_MESSAGE_LENGTH) {
+        alert(`Message cannot exceed ${CONFIG.MAX_MESSAGE_LENGTH} characters.`);
+        return;
+    }
+
+    await sendMessage(message);
+
+await sendMessage(message);
 
 // ---------- Keyboard ----------
 
