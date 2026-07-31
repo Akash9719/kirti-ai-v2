@@ -258,6 +258,8 @@ async function sendMessage(message) {
 
 }
 
+// ---------- Form Submit ----------
+
 // ---------- Keyboard ----------
 
 function handleKeyDown(event) {
