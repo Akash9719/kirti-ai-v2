@@ -28,7 +28,8 @@ app.add_middleware(
     CORSMiddleware,
     allow_origins=[
         "https://kirti-ai-frontend.onrender.com",
-        "https://rishikirti.com"
+        "https://rishikirti.com",
+        "https://www.rishikirti.com"
     ],
     allow_credentials=True,
     allow_methods=["*"],
