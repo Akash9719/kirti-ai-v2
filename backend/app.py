@@ -27,7 +27,7 @@ from fastapi.middleware.cors import CORSMiddleware
 app.add_middleware(
     CORSMiddleware,
     allow_origins=[
-        "https://redesigned-goggles-9xjpr54w7xr379r4-5500.app.github.dev"
+        "https://kirti-ai-frontend.onrender.com"
     ],
     allow_credentials=True,
     allow_methods=["*"],
