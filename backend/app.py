@@ -29,7 +29,8 @@ app.add_middleware(
     allow_origins=[
         "https://kirti-ai-frontend.onrender.com",
         "https://rishikirti.com",
-        "https://www.rishikirti.com"
+        "https://www.rishikirti.com",
+        "http://localhost:5500"
     ],
     allow_credentials=True,
     allow_methods=["*"],
