@@ -167,21 +167,74 @@ class KirtiAI {
     }
 
     //---------------------------------------
-    // Markdown
+    // Clean AI Response
+    //---------------------------------------
+
+    cleanResponse(text) {
+
+        if (!text)
+            return "";
+
+        return text
+
+            // Remove Markdown headings
+            .replace(/^#{1,6}\s*/gm, "")
+
+            // Remove Markdown horizontal lines
+            .replace(/^[-*_]{3,}\s*$/gm, "")
+
+            // Remove Markdown table separator rows
+            .replace(
+                /^\s*\|?[\s:-]+\|[\s|:-]+\|.*$/gm,
+                ""
+            )
+
+            // Remove unnecessary table pipes
+            .replace(/^\s*\|\s*/gm, "")
+            .replace(/\s*\|\s*$/gm, "")
+
+            // Remove repeated decorative symbols
+            .replace(/={3,}/g, "")
+            .replace(/-{5,}/g, "")
+
+            // Remove excessive blank lines
+            .replace(/\n{3,}/g, "\n\n")
+
+            // Clean spaces at line endings
+            .replace(/[ \t]+$/gm, "")
+
+            // Final trim
+            .trim();
+
+    }
+
+    //---------------------------------------
+    // Markdown / Display Formatting
     //---------------------------------------
 
     format(text) {
 
-        if (!CONFIG.ENABLE_MARKDOWN)
-            return text;
+        text = this.cleanResponse(text);
+
+        // Escape HTML first for safety
+        text = text
+            .replace(/&/g, "&amp;")
+            .replace(/</g, "&lt;")
+            .replace(/>/g, "&gt;");
+
+        if (!CONFIG.ENABLE_MARKDOWN) {
+
+            return text.replace(/\n/g, "<br>");
+
+        }
 
         return text
             .replace(/\n/g, "<br>")
             .replace(/\*\*(.*?)\*\*/g, "<strong>$1</strong>")
             .replace(/\*(.*?)\*/g, "<em>$1</em>")
             .replace(
-                /(https?:\/\/[^\s]+)/g,
-                '<a href="$1" target="_blank">$1</a>'
+                /(https?:\/\/[^\s<]+)/g,
+                '<a href="$1" target="_blank" rel="noopener noreferrer">$1</a>'
             );
 
     }
