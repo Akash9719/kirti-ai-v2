@@ -10,7 +10,7 @@ const CONFIG = {
 
     API_URL: "https://kirti-ai.onrender.com/chat",
 
-    REQUEST_TIMEOUT: 120000,
+    REQUEST_TIMEOUT: 300000,
 
     // ----------------------------------
     // Bot
