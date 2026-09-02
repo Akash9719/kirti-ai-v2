@@ -8,10 +8,6 @@ python-dotenv
 gspread
 google-auth
 
-sentence-transformers
-
-numpy
-
 pydantic
 
 python-multipart
