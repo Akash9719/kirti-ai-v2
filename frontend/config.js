@@ -20,9 +20,9 @@ const CONFIG = {
 
     COMPANY_NAME: "Rishikirti Technologies",
 
-    GREETING: `👋 <strong>Welcome to Rishikirti Technologies!</strong>
+    GREETING: `👋 Welcome to Rishikirti Technologies!
 
-I'm <strong>Kirti AI</strong>, your intelligent business assistant.
+I'm Kirti AI, your intelligent business assistant.
 
 I can help you with:
 
