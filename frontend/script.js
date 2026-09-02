@@ -226,8 +226,6 @@ async function sendMessage(message) {
 
     try {
 
-        await chatbot.typingDelay();
-
         const response = await chatbot.send(message);
 
         renderMessage(
