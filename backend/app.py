@@ -1,6 +1,5 @@
 from fastapi import FastAPI
 from models import LeadRequest, LeadResponse
-from sheets import save_to_google_sheets
 
 from config import settings
 from models import (
@@ -93,6 +92,9 @@ def chat(request: ChatRequest):
     }
 @app.post("/lead", response_model=LeadResponse)
 def create_lead(lead: LeadRequest):
+
+    from sheets import save_to_google_sheets
+    
     save_to_google_sheets(
         name=lead.name,
         email=lead.email,
